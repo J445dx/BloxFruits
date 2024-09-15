@@ -1,3 +1,13 @@
+-- Variáveis para controle de cores
+local hue = 0
+local speed = 0.01
+
+-- Função para mudar a cor gradualmente (arco-íris)
+local function updateRainbowColor()
+    hue = (hue + speed) % 1
+    return Color3.fromHSV(hue, 1, 1)
+end
+
 -- Função para encontrar todos os jogadores no servidor
 local function getAllPlayers()
     local players = {}
@@ -49,13 +59,20 @@ Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
 Frame.Size = UDim2.new(0, 300, 0, 200)
 Frame.Active = true
 Frame.Draggable = true
+Frame.BorderSizePixel = 2 -- Adiciona uma borda ao Frame
 
+-- Alterando a cor da borda dinamicamente
+game:GetService("RunService").RenderStepped:Connect(function()
+    Frame.BorderColor3 = updateRainbowColor()
+end)
+
+-- Adicionando o título "Davihacker hub"
 TitleLabel.Parent = Frame
 TitleLabel.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
 TitleLabel.Size = UDim2.new(1, 0, 0, 30)
 TitleLabel.Position = UDim2.new(0, 0, 0, 0)
 TitleLabel.TextColor3 = Color3.new(1, 1, 1)
-TitleLabel.Text = "J445DX"
+TitleLabel.Text = "Davihacker hub" -- Título personalizado
 TitleLabel.TextSize = 20
 
 ToggleButton.Parent = Frame
